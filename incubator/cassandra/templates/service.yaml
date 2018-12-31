@@ -8,7 +8,9 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  clusterIP: None
+  {{- if .Values.service.clusterIP }}
+  clusterIP: {{ default None .Values.service.clusterIP }}
+  {{- end }}
   type: {{ .Values.service.type }}
   ports:
   - name: intra
